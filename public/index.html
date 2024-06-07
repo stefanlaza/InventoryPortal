@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Portal</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <h1>HR Portal</h1>
+
+  <ul class="nav nav-tabs" id="hrTabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="auth-tab" data-toggle="tab" href="#auth" role="tab" aria-controls="auth" aria-selected="true">Auth</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="employee-tab" data-toggle="tab" href="#employee" role="tab" aria-controls="employee" aria-selected="false">Employees</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="vacation-tab" data-toggle="tab" href="#vacation" role="tab" aria-controls="vacation" aria-selected="false">Vacations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">Calendar</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="payroll-tab" data-toggle="tab" href="#payroll" role="tab" aria-controls="payroll" aria-selected="false">Payroll</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contract-tab" data-toggle="tab" href="#contract" role="tab" aria-controls="contract" aria-selected="false">Contracts</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="auth" role="tabpanel" aria-labelledby="auth-tab">
+      <h2>Login</h2>
+      <form id="login-form" action="/auth/login" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+
+      <h2>Register</h2>
+      <form id="register-form" action="/auth/register" method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+
+    <div class="tab-pane fade" id="employee" role="tabpanel" aria-labelledby="employee-tab">
+      <h2>Add Employee</h2>
+      <form id="add-employee-form" action="/employees/add" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="position" placeholder="Position" required>
+        <input type="text" name="department" placeholder="Department" required>
+        <button type="submit">Add Employee</button>
+      </form>
+
+      <h2>Employee List</h2>
+      <ul id="employee-list"></ul>
+    </div>
+
+    <div class="tab-pane fade" id="vacation" role="tabpanel" aria-labelledby="vacation-tab">
+      <h2>Request Vacation</h2>
+      <form id="vacation-form" action="/vacations/request" method="POST">
+        <input type="text" name="employeeId" placeholder="Employee ID" required>
+        <input type="date" name="vacationDate" required>
+        <button type="submit">Request Vacation</button>
+      </form>
+    </div>
+
+    <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+      <h2>Vacation Calendar</h2>
+      <div id="calendar"></div>
+    </div>
+
+    <div class="tab-pane fade" id="payroll" role="tabpanel" aria-labelledby="payroll-tab">
+      <h2>Process Payroll</h2>
+      <form id="payrollForm" action="/payroll/process" method="POST">
+        <div class="mb-3">
+          <label for="employeeId" class="form-label">Employee ID</label>
+          <input type="text" class="form-control" id="employeeId" name="employeeId" required>
+        </div>
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount</label>
+          <input type="number" class="form-control" id="amount" name="amount" required>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Process Pay</button>
+      </form>
+    </div>
+
+    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
+      <h2>Upload Contract</h2>
+      <form id="contractForm" action="/contracts/upload" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="employeeId" class="form-label">Employee ID</label>
+          <input type="text" class="form-control" id="employeeId" name="employeeId" required>
+        </div>
+        <div class="mb-3">
+          <label for="contract" class="form-label">Contract PDF</label>
+          <input type="file" class="form-control" id="contract" name="contract" accept="application/pdf" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Contract</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+
+</html>
